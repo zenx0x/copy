@@ -1,0 +1,68 @@
+<!--
+ * @Author: zenx0x 56068289+zenx0x@users.noreply.github.com
+ * @Date: 2023-03-17 12:52:21
+ * @LastEditors: zenx0x 56068289+zenx0x@users.noreply.github.com
+ * @LastEditTime: 2023-03-17 12:54:28
+ * @FilePath: \Notes\copy.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+为了让 XFCE 环境正常显示中文，您需要确保已经安装了中文字体。以下是在 Arch Linux 上安装和配置中文字体的步骤：
+
+安装中文字体包。以下是一些常用的中文字体包：
+
+adobe-source-han-sans-cn-fonts：思源黑体（Source Han Sans CN）
+adobe-source-han-serif-cn-fonts：思源宋体（Source Han Serif CN）
+wqy-zenhei：文泉驿正黑
+wqy-microhei：文泉驿微米黑
+noto-fonts-cjk：Google Noto CJK 字体
+您可以根据喜好选择一个或多个字体包进行安装。例如，要安装 Noto CJK 字体，请执行以下命令：
+
+bash
+Copy code
+sudo pacman -S noto-fonts-cjk
+创建或编辑 ~/.config/fontconfig/fonts.conf 文件，以设置字体优先级和别名。使用文本编辑器打开该文件（如果不存在，请创建它）。在这个例子中，我们将使用 nano 编辑器：
+
+bash
+Copy code
+nano ~/.config/fontconfig/fonts.conf
+在 fonts.conf 文件中，添加以下内容：
+
+xml
+Copy code
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+    <alias>
+        <family>sans-serif</family>
+        <prefer>
+            <family>Noto Sans CJK SC</family>
+            <family>Noto Sans</family>
+        </prefer>
+    </alias>
+    <alias>
+        <family>serif</family>
+        <prefer>
+            <family>Noto Serif CJK SC</family>
+            <family>Noto Serif</family>
+        </prefer>
+    </alias>
+    <alias>
+        <family>monospace</family>
+        <prefer>
+            <family>Noto Sans Mono CJK SC</family>
+            <family>Noto Sans Mono</family>
+        </prefer>
+    </alias>
+</fontconfig>
+请注意，将 <family> 标签内的字体名称更改为您在步骤 1 中安装的字体。上述示例中，我们使用了 Noto CJK 字体。
+
+保存文件并退出编辑器。对于 nano 编辑器，请按 Ctrl + X，然后按 Y，最后按 Enter。
+
+重启计算机以使更改生效：
+
+bash
+Copy code
+sudo reboot
+现在，您的 XFCE 环境应该可以正常显示中文字符了。如果您在应用程序菜单中发现某些项目的中文字符仍然无法正常显示，请检查相应的 .desktop 文件，并确保其 Name 和 Comment 字段使用了 UTF-8 编码。
+...
+...
