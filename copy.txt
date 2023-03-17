@@ -1,51 +1,22 @@
-如果候选框中的文本仍然显示为方框，但您可以正常输入中文，那么问题可能是由于输入法皮肤或配置引起的。您可以尝试以下方法来解决这个问题：
+I apologize for the confusion. It seems the fcitx5-module-kimpanel package is not available in the Arch Linux official repositories. You can install the fcitx5-kimpanel-git package from the AUR (Arch User Repository) instead.
 
-安装 fcitx5-configtool 以进行配置：
-
-bash
-Copy code
-sudo pacman -S fcitx5-configtool
-运行 fcitx5-configtool：
+To install fcitx5-kimpanel-git, you can use an AUR helper like yay. If you haven't installed yay yet, you can do so with the following commands:
 
 bash
 Copy code
-fcitx5-configtool
-在打开的配置界面中，选择左侧的“附加组件”选项卡。
+sudo pacman -S --needed base-devel git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+After installing yay, you can install fcitx5-kimpanel-git using the following command:
 
-在右侧列表中找到名为“Classic User Interface”的项目，确保已启用（复选框已选中）。
-
-点击左侧的“输入法”选项卡，然后在右侧的输入法列表中选择拼音输入法。
-
-单击右侧的“配置”按钮。在打开的配置界面中，检查皮肤设置并尝试更改为其他皮肤（如果可用）。
-
-保存更改并关闭配置窗口。
-
-重启 fcitx5 输入法框架：
+bash
+Copy code
+yay -S fcitx5-kimpanel-git
+Once the installation is complete, restart fcitx5:
 
 bash
 Copy code
 killall fcitx5
 fcitx5 &
-检查候选栏是否已正确显示中文字符。
-
-如果问题仍然存在，您可以尝试重置 fcitx5 的配置文件。首先，关闭 fcitx5 输入法框架：
-
-bash
-Copy code
-killall fcitx5
-然后，备份您当前的 fcitx5 配置文件：
-
-bash
-Copy code
-mv ~/.config/fcitx5 ~/.config/fcitx5.bak
-接下来，重新启动 fcitx5 输入法框架：
-
-bash
-Copy code
-fcitx5 &
-这将生成一个新的默认配置文件。您可能需要重新添加拼音输入法并进行配置。检查候选栏是否已正确显示中文字符。如果问题解决了，您可以根据需要进行其他配置。如果问题仍然存在，您可以将备份的配置文件还原：
-
-bash
-Copy code
-mv ~/.config/fcitx5.bak ~/.config/fcitx5
-并考虑在相关社区和论坛中寻求进一步的帮助。
+Now, follow the previous instructions to add the kimpanel applet/widget to your panel, and check if it works correctly with fcitx5.
