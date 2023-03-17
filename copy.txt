@@ -1,45 +1,21 @@
-要在 Arch Linux 上重新安装 fcitx5 中文输入法，请按照以下步骤操作：
+在 Arch Linux 上，如果 fcitx5 的拼音输入法候选栏中的中文字符显示为方框或乱码，可能是因为缺少合适的中文字体。为了解决这个问题，请按照以下步骤操作：
 
-首先，安装 fcitx5 及其相关组件：
-
-bash
-Copy code
-sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt
-创建或编辑 ~/.pam_environment 文件以在用户级别配置输入法：
+首先，安装一些常用的中文字体，如 Noto 字体：
 
 bash
 Copy code
-nano ~/.pam_environment
-如果您使用的是其他文本编辑器（如 vim 或 emacs），请相应地替换 nano。
-
-将以下内容添加到 ~/.pam_environment 文件中：
-
-scss
-Copy code
-INPUT_METHOD DEFAULT=fcitx5
-GTK_IM_MODULE DEFAULT=fcitx5
-QT_IM_MODULE DEFAULT=fcitx5
-XMODIFIERS DEFAULT=@im=fcitx5
-保存并退出编辑器。
-
-在您的 ~/.xprofile 文件中添加以下内容以确保每次登录时都会启动 fcitx5。如果文件不存在，请创建一个：
+sudo pacman -S noto-fonts-cjk
+重启 fcitx5 输入法框架：
 
 bash
 Copy code
-nano ~/.xprofile
-添加以下内容：
-
-typescript
-Copy code
-export GTK_IM_MODULE=fcitx5
-export QT_IM_MODULE=fcitx5
-export XMODIFIERS=@im=fcitx5
+killall fcitx5
 fcitx5 &
-保存并退出编辑器。
+在重新启动 fcitx5 后，查看候选栏是否已正确显示中文字符。
 
-重新启动计算机以使更改生效：
+如果问题仍然存在，请尝试安装其他中文字体，如：
 
 bash
 Copy code
-sudo reboot
-完成以上步骤后，您已经成功安装了 fcitx5 中文输入法。登录后，您应该能看到 fcitx5 的托盘图标。点击图标并从候选列表中选择拼音输入法。现在，您应该可以使用 fcitx5 中文输入法进行拼音输入了。
+sudo pacman -S adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+安装字体后，您可能需要重启计算机或重新登录以使新字体生效。如果问题仍未解决，请检查 fcitx5 的配置文件，确保没有错误或遗漏的设置。
